@@ -181,7 +181,8 @@ class IsolationGui():
                 elif event.type == MOUSEMOTION:
                     self.set_mouse_pos(event.pos)
 
-def new_game(mode, AIPlayer=RandomPlayer):
+def new_game(mode):
+    AIPlayer = RandomPlayer
     if mode == 1:
         player1 = GuiPlayer()
         player2 = AIPlayer()
