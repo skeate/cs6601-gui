@@ -160,6 +160,7 @@ class IsolationGui():
                     self.kill_game()
                 elif task['name'] == 'human move start':
                     self.input_mode = True
+                    self.draw_board()
                 elif task['name'] == 'human move stop':
                     self.input_mode = False
                 elif task['name'] == 'draw':
