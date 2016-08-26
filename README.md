@@ -15,9 +15,9 @@ convenience:
 
 > Press ESC or Ctrl+C to close this window at any time.
 >
-> Press 1 to start a new game as player 1 against the AI.
-> Press 2 to start a new game as player 2 against the AI.
-> Press 3 to start a game with two human players.
+> Press 1 to start a new game as player 1 against the AI.  
+> Press 2 to start a new game as player 2 against the AI.  
+> Press 3 to start a game with two human players.  
 > Press 4 to watch the AI play against itself.
 
 These controls work even in the middle of a game -- the numbers will terminate
