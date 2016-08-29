@@ -156,7 +156,7 @@ class IsolationGui():
                             lambda x: x * size,
                             self.board.get_last_move_for_player(task['winner'])
                             )
-                    self.draw_text('W', 48, pos=last_move, center_in=(size,)*2)
+                    self.draw_text('W', 48, pos=tuple(reversed(last_move)), center_in=(size,)*2)
                     self.kill_game()
                 elif task['name'] == 'human move start':
                     self.input_mode = True
