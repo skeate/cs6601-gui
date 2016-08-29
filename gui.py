@@ -74,12 +74,12 @@ class IsolationGui():
     def handle_click(self, pos, button):
         if not self.input_mode:
             return
-        x = int(pos[0] / self.square_size)
-        y = int(pos[1] / self.square_size)
-        q_game.put((x,y))
+        row = int(pos[1] / self.square_size)
+        col = int(pos[0] / self.square_size)
+        q_game.put((row, col))
 
     def set_mouse_pos(self, pos):
-        self.mouse_pos = (int(pos[0] / self.square_size), int(pos[1] / self.square_size))
+        self.mouse_pos = (int(pos[1] / self.square_size), int(pos[0] / self.square_size))
         if self.input_mode:
             self.draw_board()
 
@@ -91,19 +91,19 @@ class IsolationGui():
         surface = self.screen
         light_start = False
         legal_moves = self.board.get_legal_moves()
-        for i in xrange(self.width):
+        for row in xrange(self.height):
             light_start = not light_start
             light = light_start
-            for j in xrange(self.height):
+            for col in xrange(self.width):
                 p1_last_move = self.board.__last_player_move__[self.board.__player_1__]
                 p2_last_move = self.board.__last_player_move__[self.board.__player_2__]
-                match = lambda pos: i == pos[0] and  j == pos[1]
+                match = lambda pos: row == pos[0] and col == pos[1]
                 if match(p1_last_move):
                     color = red
                 elif match(p2_last_move):
                     color = blue
-                elif self.board.__board_state__[i][j] == Board.BLANK:
-                    square_legal = self.input_mode and (i,j) in legal_moves
+                elif self.board.__board_state__[row][col] == Board.BLANK:
+                    square_legal = self.input_mode and (row,col) in legal_moves
                     if square_legal and match(self.mouse_pos):
                         color = green
                     elif square_legal and self.board.move_count > 1:
@@ -112,7 +112,7 @@ class IsolationGui():
                         color = light_color if light else dark_color
                 else:
                     color = disabled
-                rect = pygame.Rect(i * self.square_size, j * self.square_size, self.square_size, self.square_size)
+                rect = pygame.Rect(col * self.square_size, row * self.square_size, self.square_size, self.square_size)
                 surface.fill(color, rect)
                 light = not light
 
