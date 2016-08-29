@@ -216,7 +216,7 @@ def new_game(mode):
         if task == 'die':
             print('== END GAME ==')
             loop = False
-        elif task == 'move':
+        elif task == 'move' and len(legal_moves) > 0:
             move_start = curr_time_millis()
             time_left = lambda : time_limit - (curr_time_millis() - move_start)
             player = board.get_active_player()
