@@ -201,23 +201,32 @@ def new_game(mode):
     curr_time_millis = lambda : int(round(time() * 1000))
     time_limit = 500
 
+    print('== BEGIN GAME ==')
+
     loop = True
     while loop:
         q_gui.put({'name': 'draw'})
-        if len(board.get_legal_moves()) == 0:
+        legal_moves = board.get_legal_moves()
+        if len(legal_moves) == 0:
             q_gui.put({
                 'name': 'game over',
                 'winner': board.__inactive_player__
             })
         task = q_game.get()
         if task == 'die':
+            print('== END GAME ==')
             loop = False
         elif task == 'move':
             move_start = curr_time_millis()
             time_left = lambda : time_limit - (curr_time_millis() - move_start)
             player = board.get_active_player()
-            next_move = player.move(board, board.get_legal_moves(), time_left)
+            next_move = player.move(board, legal_moves, time_left)
             if next_move != (-1, -1):
+                player_symbol = board.__player_symbols__[player]
+                print('player {0}: {1} | took {2} ms'.format(
+                    player_symbol,
+                    next_move,
+                    time_limit - time_left()))
                 board.__apply_move__(next_move)
         q_game.task_done()
 
